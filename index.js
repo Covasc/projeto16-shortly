@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { deleteUrl, getRanking, getUrlById, getUserLinks, openShortUrl, postUrl, signIn, signUp } from "./src/controllers/authControllers.js";
+import { signIn, signUp } from "./src/controllers/authControllers.js";
+import { deleteUrl, postUrl } from "./src/controllers/postControllers.js";
+import { getRanking, getUrlById, getUserLinks, openShortUrl } from "./src/controllers/getControllers.js";
 
 const server = express();
 server.use(express.json());
