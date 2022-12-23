@@ -23,5 +23,5 @@ server.get('/users/me', getUserLinks);
 server.get('/ranking', getRanking);
 
 server.listen(PORT, () => {
-    console.log("server running")
+    console.log(`sever running on ${PORT}`)
 });

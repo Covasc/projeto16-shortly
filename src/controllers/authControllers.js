@@ -1,19 +1,14 @@
-import joi from "joi";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
 import connection from "../db.js";
+import { signUpSchema } from "../schemas/authSchemas.js";
+import { signInSchema } from "../schemas/authSchemas.js";
 
 export async function signUp(request, response) {
 
     const userData = request.body;
 
-    const credentialsSchema = joi.object({
-        name: joi.string().required(),
-        email: joi.string().email().required(),
-        password: joi.string().required(),
-        confirmPassword: joi.ref('password')
-    });
-    const validation = credentialsSchema.validate(userData);
+    const validation = signUpSchema.validate(userData);
     if (validation.error) {
         console.log(validation.error.details);
         return response.sendStatus(422);
@@ -55,11 +50,7 @@ export async function signIn (request, response) {
         return newToken;
     }
 
-    const credentialsSchema = joi.object({
-        email: joi.string().email().required(),
-        password: joi.string().required()
-    });
-    const validation = credentialsSchema.validate(userCredentials);
+    const validation = signInSchema.validate(userCredentials);
     if (validation.error) {
         console.log(validation.error.details);
         return response.sendStatus(422);
